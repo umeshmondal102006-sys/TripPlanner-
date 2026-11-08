@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Planner — Your Personal Travel Planner</title>
+<meta name="description" content="Plan a trip around your destination, budget, travel days and style with Trip Planner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#18332e;--green:#245b4e;--green2:#397565;--lime:#d8ed9b;--cream:#f7f8f2;--soft:#edf2e7;--muted:#77867e;--line:#e3e9df;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}a{color:inherit;text-decoration:none}button,input,select{font:inherit}
+.topbar{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.brand{font:800 25px Manrope;letter-spacing:-1.5px}.brand-mark{display:inline-grid;place-items:center;width:29px;height:29px;background:var(--lime);border-radius:9px;margin-right:6px;color:var(--green)}.brand-dot{color:#91ad4e}.topbar nav{display:flex;gap:30px;font-size:13px;color:#65766c}.topbar nav a:hover{color:var(--green2)}.nav-cta,.outline{border:1px solid #cbd7ca;border-radius:25px;padding:11px 17px;font-size:12px;font-weight:700;background:transparent;cursor:pointer}
+.hero{max-width:1280px;margin:auto;padding:75px 8% 90px;display:grid;grid-template-columns:1fr 1fr;gap:6%;align-items:center}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:700;color:#829b49}.eyebrow:before{content:"";display:inline-block;width:7px;height:7px;background:#a9c85b;border-radius:50%;margin-right:9px;box-shadow:0 0 0 5px #edf3df}.hero h1{font:800 clamp(48px,6vw,76px)/1.05 Manrope;letter-spacing:-4px;margin:20px 0}.hero h1 em,h2 em{font-family:Georgia,serif;color:#81984b;font-weight:400}.hero p{max-width:470px;color:var(--muted);font-size:15px;line-height:1.85}.btn{display:inline-flex;align-items:center;justify-content:center;gap:28px;background:var(--green);color:#fff;border:0;border-radius:5px;padding:16px 22px;font-size:13px;font-weight:700;cursor:pointer}.btn:hover{background:var(--green2)}.hero .btn{margin-top:15px}.hero-note{margin-top:28px;font-size:11px;color:#87958b}.hero-art{height:425px;position:relative}.hero-photo{position:absolute;inset:0 7% 0 5%;border-radius:48% 48% 8px 8px;background:linear-gradient(180deg,transparent 50%,#173b2f55),url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85") center/cover}.photo-caption{position:absolute;bottom:24px;left:25px;color:#fff;font-size:10px;letter-spacing:2px}.float-card{position:absolute;bottom:38px;left:-18px;background:#fff;padding:16px 19px;display:flex;align-items:center;gap:12px;border-radius:8px;box-shadow:0 12px 35px #203d241c}.float-card b,.float-card small{display:block}.float-card b{font-size:12px}.float-card small{font-size:10px;color:#829087;margin-top:4px}.sun{font-size:28px;color:#a5bd58}.stamp{position:absolute;right:0;top:20px;width:84px;height:84px;border-radius:50%;background:var(--lime);display:grid;place-content:center;text-align:center;font-size:10px;font-weight:800;letter-spacing:2px;line-height:1.4;transform:rotate(12deg)}
+.planner{background:var(--soft);padding:72px 8% 82px}.section-head,.result-head{max-width:1080px;margin:0 auto 27px;display:flex;justify-content:space-between;align-items:end}.section-head h2,.result-head h2,.how h2{font:800 37px Manrope;letter-spacing:-1.5px;margin:10px 0 0}.section-head p{font-size:12px;color:var(--muted);line-height:1.7}.form-card{max-width:1080px;margin:auto;background:#fff;padding:34px 36px;border-radius:10px;box-shadow:0 14px 40px #28462a0a}.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:23px 18px}.field{display:block}.wide{grid-column:span 2}.field>span{display:block;font-size:9px;letter-spacing:1.3px;font-weight:700;color:#68786e;margin-bottom:9px}.input{height:48px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;padding:0 12px;gap:10px}.input i{font-style:normal;color:#91a64c}.input input,.input select{border:0;outline:0;width:100%;background:transparent;color:var(--ink);font-size:13px;min-width:0}.generate{width:100%;margin-top:26px;height:52px}.form-note{text-align:center;color:#9aa49c;font-size:10px;margin:12px 0 0}
+.results{max-width:1280px;margin:auto;padding:72px 8%}.result-head{align-items:center}.result-head p{font-size:13px;color:var(--muted)}.result-layout{display:grid;grid-template-columns:1.65fr 1fr;gap:23px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0 35px}.summary-box{background:var(--soft);padding:18px;border-radius:7px;min-width:0}.summary-box span{font-size:9px;letter-spacing:1px;color:#7c8b81;text-transform:uppercase}.summary-box b{display:block;font:700 17px Manrope;margin-top:8px;overflow-wrap:anywhere}.block-title{font-size:10px;letter-spacing:1.6px;font-weight:700;color:#82994b;margin-bottom:15px}.day-card,.budget-card,.tips-card{background:#fff;border:1px solid var(--line);border-radius:7px;padding:21px;margin-bottom:13px}.day-card h3{font:700 16px Manrope;margin:0 0 13px}.day-card h3 span{font-weight:500;color:#8ca34f}.activity{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:10px 0;border-top:1px solid #eff1ec;font-size:12px}.activity time{font-weight:700;color:#8ba24d}.activity p{margin:0;color:#5e6e64;line-height:1.6}.activity b{color:#29463a}.budget-total{font:800 31px Manrope;margin-top:15px}.muted{font-size:11px;color:#8b978e;margin:3px 0 18px}.budget-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid #eef0eb;font-size:12px}.budget-row strong{white-space:nowrap}.budget-message{background:#f0f4e5;padding:12px;border-radius:5px;color:#536b31;font-size:11px;line-height:1.6;margin-top:14px}.tips-card{margin-top:16px}.tips-card ul,.budget-card ul{padding-left:18px;color:#647369;font-size:12px;line-height:1.8}.disclaimer{font-size:10px;color:#9aa39c;margin-top:18px}.badge{display:inline-block;margin-top:10px;background:#edf3df;color:#617b30;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.how{padding:82px 8%;text-align:center;background:#fff}.how .eyebrow:before{display:none}.how h2{margin:12px 0 40px}.steps{max-width:1030px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:left}.step{border-top:1px solid var(--line);padding:24px 8px;position:relative}.step-no{position:absolute;right:5px;color:#aab5aa;font-size:11px}.step-icon{font-size:24px;color:#8ca34f}.step h3{font:700 17px Manrope;margin:16px 0 8px}.step p{font-size:12px;line-height:1.8;color:#7d8981;max-width:270px}
+.saved{background:#f1f4ec;padding:70px 8%;}.saved-inner{max-width:1080px;margin:auto}.saved-head{display:flex;justify-content:space-between;align-items:center}.saved-head h2{font:800 28px Manrope;margin:0}.saved-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}.saved-item{background:#fff;border:1px solid var(--line);border-radius:7px;padding:17px;display:flex;justify-content:space-between;align-items:center;gap:10px}.saved-item b{font:700 14px Manrope}.saved-item small{display:block;color:#8b978e;font-size:10px;margin-top:5px}.saved-item button{border:0;background:#edf2e7;color:#4e6c47;border-radius:4px;padding:8px 10px;cursor:pointer;font-size:11px}
+footer{padding:27px 8%;display:flex;justify-content:space-between;align-items:center;background:#eef1e9;color:#89958c;font-size:10px}footer .brand{color:var(--ink);font-size:20px}.error{background:#fff0ed;color:#a43b2d;padding:12px;border-radius:5px;font-size:12px;margin-top:12px}.hidden{display:none!important}
+@media print{.topbar,.hero,.planner,.how,.saved,footer,.outline,.no-print{display:none!important}.results{padding:0;max-width:none}.result-layout{grid-template-columns:1.5fr 1fr}.day-card,.budget-card{break-inside:avoid}}
+@media(max-width:800px){.topbar{padding:0 5%;height:68px}.topbar nav{display:none}.hero{padding:55px 7% 65px;grid-template-columns:1fr;gap:35px}.hero-art{height:340px}.planner,.results,.how,.saved{padding:58px 6%}.form-grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;gap:15px}.section-head h2,.result-head h2,.how h2{font-size:31px}.result-layout{grid-template-columns:1fr}.steps{gap:15px}footer{padding:25px 6%;gap:15px;flex-wrap:wrap}}
+@media(max-width:520px){.hero h1{letter-spacing:-2.5px}.hero-art{height:285px}.float-card{left:-5px;bottom:20px}.stamp{width:70px;height:70px;font-size:8px}.section-head{display:block}.section-head p{margin-top:12px}.form-card{padding:24px 18px}.form-grid{grid-template-columns:1fr;gap:18px}.wide{grid-column:span 1}.summary{grid-template-columns:1fr 1fr}.summary-box:last-child{grid-column:span 2}.result-head{display:block}.result-head .outline{margin-top:14px}.steps{grid-template-columns:1fr;gap:0}.saved-list{grid-template-columns:1fr}.saved-head{align-items:flex-start;gap:10px;flex-direction:column}footer span:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-mark">✦</span> tripplanner<span class="brand-dot">.</span></a>
+  <nav><a href="#how">How it works</a><a href="#planner">Plan a trip</a><a href="#saved">Saved trips</a></nav>
+  <a class="nav-cta" href="#planner">Start planning ↗</a>
+</header>
+<main>
+<section class="hero">
+ <div><div class="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</div>
+ <h1>Less planning.<br><em>More exploring.</em></h1>
+ <p>Tell us where you want to go, how much you want to spend and how many days you have. Trip Planner turns your trip details into a day-by-day travel plan.</p>
+ <a class="btn" href="#planner">Plan my trip <span>→</span></a><div class="hero-note">✦ &nbsp;Made for curious travellers</div></div>
+ <div class="hero-art"><div class="hero-photo"><div class="photo-caption">✦ &nbsp; FIND YOUR SOMEWHERE</div></div><div class="float-card"><span class="sun">☼</span><div><b>Your kind of getaway</b><small>Planned around your budget</small></div></div><div class="stamp">GO<br>YOUR<br>WAY</div></div>
+</section>
+<section class="planner" id="planner">
+ <div class="section-head"><div><div class="eyebrow">THE GOOD PART</div><h2>Where to next?</h2></div><p>A few details are all we need<br>to get your journey rolling.</p></div>
+ <form class="form-card" id="tripForm">
+  <div class="form-grid">
+   <label class="field wide"><span>WHERE ARE YOU STARTING?</span><div class="input"><i>⌖</i><input id="origin" placeholder="e.g. Durgapur" required></div></label>
+   <label class="field wide"><span>WHERE DO YOU WANT TO GO?</span><div class="input"><i>📍</i><input id="destination" placeholder="e.g. Darjeeling" required></div></label>
+   <label class="field"><span>YOUR TOTAL BUDGET (₹)</span><div class="input"><i>₹</i><input id="budget" type="number" min="500" placeholder="10000" required></div></label>
+   <label class="field"><span>HOW MANY DAYS?</span><div class="input"><i>▦</i><input id="days" type="number" min="1" max="14" value="3" required></div></label>
+   <label class="field"><span>NUMBER OF TRAVELLERS</span><div class="input"><i>♧</i><input id="people" type="number" min="1" max="20" value="2" required></div></label>
+   <label class="field"><span>TRAVEL STYLE</span><div class="input"><i>✧</i><select id="style"><option value="balanced">A bit of everything</option><option value="nature">Nature & outdoors</option><option value="culture">Culture & history</option><option value="food">Food & local life</option><option value="adventure">Adventure</option><option value="relaxed">Slow & relaxed</option></select></div></label>
+  </div>
+  <button class="btn generate" type="submit" id="generateBtn">Build my itinerary <span>✦</span></button>
+  <p class="form-note">Create a suggested itinerary and estimated budget. Check live prices and local details before booking.</p><div id="error" class="error hidden"></div>
+ </form>
+</section>
+<section class="results hidden" id="results">
+ <div class="result-head"><div><div class="eyebrow">YOUR JOURNEY, MAPPED OUT</div><h2 id="resultTitle">Your trip plan</h2><p id="resultSubtitle"></p><span id="modeBadge" class="badge">Sample itinerary</span></div><button class="outline" onclick="window.print()">Save / Print PDF ↗</button></div>
+ <div class="summary" id="summary"></div>
+ <div class="result-layout"><div><div class="block-title">THE DAY-BY-DAY PLAN</div><div id="dayPlans"></div><div class="tips-card"><div class="block-title">SMART TRAVEL TIPS</div><ul id="tips"></ul></div></div>
+ <aside class="budget-card"><div class="block-title">BUDGET SNAPSHOT</div><div class="budget-total" id="budgetTotal"></div><p class="muted">Total budget entered</p><div id="budgetRows"></div><div class="budget-message" id="budgetMessage"></div><p><a id="mapLink" target="_blank" rel="noopener" class="outline" style="display:inline-block;margin-top:15px">Explore destination on Google Maps ↗</a></p></aside></div>
+ <p class="disclaimer" id="disclaimer"></p>
+</section>
+<section class="how" id="how"><div class="eyebrow">NO SPREADSHEETS. NO STRESS.</div><h2>Three steps to <em>takeoff.</em></h2><div class="steps">
+ <article class="step"><div class="step-no">01</div><div class="step-icon">⌖</div><h3>Tell us the basics</h3><p>Choose your destination, budget, trip length and the kind of experience you love.</p></article>
+ <article class="step"><div class="step-no">02</div><div class="step-icon">✦</div><h3>Get your game plan</h3><p>See a day-wise outline with suggested activities and a simple cost breakdown.</p></article>
+ <article class="step"><div class="step-no">03</div><div class="step-icon">↗</div><h3>Make it yours</h3><p>Review the suggestions, check real-world details and get ready to explore.</p></article>
+</div></section>
+<section class="saved" id="saved"><div class="saved-inner"><div class="saved-head"><div><div class="eyebrow">YOUR TRAVEL NOTEBOOK</div><h2>Saved trips</h2></div><button class="outline" onclick="clearTrips()">Clear saved trips</button></div><div id="savedList" class="saved-list"></div></div></section>
+</main>
+<footer><a class="brand" href="#"><span class="brand-mark">✦</span> tripplanner<span class="brand-dot">.</span></a><span>Made for the joy of getting there.</span><span>© 2026 Trip Planner</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+const money=n=>"₹"+Math.round(Number(n)||0).toLocaleString("en-IN");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const activitySets={
+ balanced:["Explore a popular local landmark","Discover the old town and local streets","Visit a scenic viewpoint","Browse a local market","Try a regional food spot","Enjoy an evening walk"],
+ nature:["Visit a nearby nature spot","Enjoy a scenic walk or viewpoint","Explore a garden, lake or trail","Spend time outdoors and take photos","Watch the sunset from a scenic location"],
+ culture:["Visit a museum or heritage site","Explore historic streets and architecture","Discover local crafts and markets","Learn about the destination's local culture","Visit a historic place of interest"],
+ food:["Try a local breakfast favourite","Explore a street-food area","Have a regional lunch","Visit a popular local café or food market","Taste a local speciality"],
+ adventure:["Try a suitable guided outdoor activity","Explore a nature trail","Visit a scenic lookout","Choose a safe local adventure experience","Enjoy an active day outdoors"],
+ relaxed:["Enjoy a slow breakfast","Take a relaxed neighbourhood walk","Spend time at a peaceful local spot","Enjoy a scenic café or sunset","Explore nearby shops at your own pace"]
+};
+const special={
+ varanasi:["Dashashwamedh Ghat (Ganga Aarti)","Assi Ghat","Manikarnika Ghat","Kashi Vishwanath Temple","Sankat Mochan Hanuman Temple","Tulsi Manas Temple","Sarnath (Dhamek Stupa and Archaeological Museum)","Ramnagar Fort","Bharat Mata Temple","Scindia Ghat"],
+ digha:["New Digha Beach","Old Digha Sea Beach","Marine Aquarium and Regional Centre","Amarabati Park","Digha Mohona Fish Market","Udaipur Sea Beach","Shankarpur Beach","Talsari Beach (Odisha, nearby day trip)","Chandaneswar Temple (nearby)"],
+ sikkim:["Tsomgo (Changu) Lake","Nathula Pass (permit and weather dependent)","Baba Harbhajan Singh Mandir","Rumtek Monastery","Gangtok MG Marg","Tashi Viewpoint","Buddha Park, Ravangla","Pelling Skywalk and Chenrezig Statue","Pemayangtse Monastery","Khecheopalri Lake","Yumthang Valley","Zero Point (weather and road dependent)","Gurudongmar Lake (permit and acclimatisation required)"],
+ arunachal:["Tawang Monastery","Sela Pass","Sela Lake","Madhuri Lake (Sangetsar Lake)","Bum La Pass (permit required)","Nuranang (Jang) Waterfall","War Memorial, Tawang","Dirang Dzong","Sangti Valley","Bomdila Monastery","Ziro Valley","Ita Fort, Itanagar"],
+ meghalaya:["Umiam Lake","Elephant Falls","Shillong Peak","Laitlum Canyons","Don Bosco Museum","Mawlynnong Village","Living Root Bridge, Riwai","Dawki and Umngot River","Nohkalikai Falls","Seven Sisters Falls","Mawsmai Cave","Double Decker Living Root Bridge (trek)","Krang Suri Falls","Cherrapunji viewpoints"],
+ khajuraho:["Kandariya Mahadeva Temple","Lakshmana Temple","Vishvanatha Temple","Chitragupta Temple","Devi Jagadambi Temple","Chausath Yogini Temple","Matangeshwar Temple","Khajuraho Archaeological Museum","Raneh Falls (nearby)","Panna National Park (day trip)"],
+ kedarnath:["Kedarnath Temple","Bhairavnath Temple","Gaurikund","Shankaracharya Samadhi","Vasuki Tal (high-altitude trek)","Triyuginarayan Temple (nearby)","Sonprayag","Guptkashi","Ukhimath"],
+ tawang:["Tawang Monastery","Sela Pass","Sela Lake","Bum La Pass (permit required)","Madhuri Lake / Sangetsar Lake","Nuranang Waterfall","Tawang War Memorial","P.T. Tso Lake","Jaswant Garh War Memorial"],
+ spiti:["Key Monastery","Kibber Village","Chicham Bridge","Kaza","Hikkim (world's high-altitude post office)","Komik Village","Langza Buddha Statue","Dhankar Monastery and Lake","Tabo Monastery","Pin Valley National Park","Chandratal Lake (seasonal road access)"],
+ bodh_gaya:["Mahabodhi Temple","Great Buddha Statue","Bodhi Tree","Thai Monastery","Royal Bhutan Monastery","Japanese Temple","Tibetan Monastery","Muchalinda Lake","Archaeological Museum, Bodh Gaya","Dungeshwari Cave Temples (nearby)"],
+ darjeeling:["Tiger Hill sunrise","Batasia Loop","Darjeeling Himalayan Railway (Toy Train)","Mall Road / Chowrasta","Happy Valley Tea Estate","Himalayan Mountaineering Institute","Padmaja Naidu Himalayan Zoological Park","Japanese Peace Pagoda","Ghoom Monastery","Rock Garden"],
+ goa:["Baga Beach","Calangute Beach","Anjuna Beach","Vagator Beach","Basilica of Bom Jesus","Se Cathedral","Fort Aguada","Chapora Fort","Fontainhas Latin Quarter","Dudhsagar Falls"],
+ jaipur:["Amber Fort","Hawa Mahal","City Palace","Jantar Mantar","Nahargarh Fort","Jaigarh Fort","Jal Mahal viewpoint","Albert Hall Museum","Patrika Gate","Johari Bazaar"],
+ kolkata:["Victoria Memorial","Howrah Bridge","Dakshineswar Kali Temple","Kalighat Temple","Indian Museum","Prinsep Ghat","St. Paul's Cathedral","Marble Palace","College Street","Eco Park"],
+ puri:["Shree Jagannath Temple","Puri Beach","Golden Beach","Swargadwar Beach","Raghurajpur Artist Village","Konark Sun Temple (day trip)","Chilika Lake (Satapada day trip)","Gundicha Temple","Loknath Temple"],
+ delhi:["Red Fort","Qutub Minar","Humayun's Tomb","India Gate","Lotus Temple","Akshardham Temple","Jama Masjid","Chandni Chowk","Lodhi Garden","Rashtrapati Bhavan viewpoint"],
+ agra:["Taj Mahal","Agra Fort","Mehtab Bagh","Itmad-ud-Daulah (Baby Taj)","Fatehpur Sikri","Akbar's Tomb, Sikandra","Kinari Bazaar","Taj Nature Walk"],
+ mumbai:["Gateway of India","Chhatrapati Shivaji Maharaj Terminus","Elephanta Caves","Marine Drive","Siddhivinayak Temple","Haji Ali Dargah","Juhu Beach","Bandra-Worli Sea Link viewpoint","Sanjay Gandhi National Park","Colaba Causeway"],
+ amritsar:["Golden Temple (Harmandir Sahib)","Jallianwala Bagh","Wagah-Attari Border ceremony","Partition Museum","Durgiana Temple","Gobindgarh Fort","Hall Bazaar"],
+ shimla:["The Ridge","Mall Road","Christ Church","Jakhoo Temple","Kufri","Viceregal Lodge (IIAS)","Green Valley","Tara Devi Temple"],
+ manali:["Hadimba Devi Temple","Old Manali","Solang Valley","Atal Tunnel and Sissu","Rohtang Pass (permit and road conditions apply)","Vashisht Hot Springs","Manu Temple","Jogini Waterfall","Naggar Castle","Mall Road","Gulaba","Hampta Pass (trek)","Beas Kund (trek)","Nehru Kund","Van Vihar National Park"],
+ kashmir:["Dal Lake and Shikara ride, Srinagar","Shalimar Bagh","Nishat Bagh","Shankaracharya Temple","Gulmarg Gondola and meadows","Pahalgam and Betaab Valley","Aru Valley","Chandanwari","Sonamarg and Thajiwas Glacier","Doodhpathri","Yusmarg","Hazratbal Shrine","Pari Mahal","Mughal Gardens"],
+ srinagar:["Dal Lake","Shikara ride","Mughal Gardens (Shalimar Bagh)","Nishat Bagh","Shankaracharya Temple","Hazratbal Shrine","Pari Mahal","Old Srinagar and Jamia Masjid"],
+ udaipur:["City Palace","Lake Pichola boat ride","Jag Mandir","Jagdish Temple","Saheliyon Ki Bari","Fateh Sagar Lake","Sajjangarh (Monsoon Palace)","Bagore Ki Haveli","Ambrai Ghat"],
+ jodhpur:["Mehrangarh Fort","Jaswant Thada","Umaid Bhawan Palace Museum","Clock Tower and Sardar Market","Toorji Ka Jhalra","Mandore Gardens","Rao Jodha Desert Rock Park"],
+ jaisalmer:["Jaisalmer Fort","Patwon Ki Haveli","Salim Singh Ki Haveli","Nathmal Ki Haveli","Gadisar Lake","Sam Sand Dunes","Kuldhara Village","Bada Bagh"],
+ rishikesh:["Laxman Jhula area","Ram Jhula","Triveni Ghat Ganga Aarti","Parmarth Niketan","Beatles Ashram","Neer Garh Waterfall","Ganga riverside ghats","Shivpuri river-rafting area"],
+ haridwar:["Har Ki Pauri Ganga Aarti","Mansa Devi Temple","Chandi Devi Temple","Maya Devi Temple","Bharat Mata Mandir","Shantikunj","Daksh Mahadev Temple"],
+ ayodhya:["Shri Ram Janmabhoomi Mandir","Hanuman Garhi","Kanak Bhawan","Dashrath Mahal","Saryu River / Ram Ki Paidi","Nageshwarnath Temple","Guptar Ghat"],
+ prayagraj:["Triveni Sangam","Allahabad Fort (view from outside/approved areas)","Anand Bhavan","Khusro Bagh","Allahabad Museum","Hanuman Mandir","Swaraj Bhavan"],
+ lucknow:["Bara Imambara","Chota Imambara","Rumi Darwaza","British Residency","The Clock Tower","Ambedkar Memorial Park","Hazratganj","Chattar Manzil"],
+ mathura:["Shri Krishna Janmasthan Temple","Dwarkadhish Temple","Vishram Ghat","Gokul","Govardhan Hill","Barsana Radha Rani Temple","Vrindavan Banke Bihari Temple","Prem Mandir","ISKCON Vrindavan","Nidhivan"],
+ bhopal:["Upper Lake (Bhojtal)","Van Vihar National Park","Taj-ul-Masajid","Sanchi Stupa (day trip)","Bhimbetka Rock Shelters (day trip)","State Museum","Gohar Mahal"],
+ ahmedabad:["Sabarmati Ashram","Adalaj Stepwell","Sidi Saiyyed Mosque","Jama Masjid","Kankaria Lake","Akshardham, Gandhinagar","Modhera Sun Temple (day trip)"],
+ kochi:["Fort Kochi","Chinese Fishing Nets","Mattancherry Palace","Paradesi Synagogue area","St. Francis Church","Jew Town","Marine Drive","Hill Palace Museum"],
+ munnar:["Eravikulam National Park","Mattupetty Dam","Top Station","Tea Museum","Echo Point","Kundala Lake","Attukad Waterfalls","Pothamedu Viewpoint"],
+ alleppey:["Alappuzha Beach","Alappuzha Lighthouse","Vembanad Lake","Kuttanad backwaters","Pathiramanal Island","Marari Beach"],
+ ooty:["Ooty Lake","Government Botanical Garden","Doddabetta Peak","Rose Garden","Nilgiri Mountain Railway","Pykara Lake and Falls","Tea Factory and Museum"],
+ mysore:["Mysore Palace","Chamundi Hill and Temple","Brindavan Gardens","St. Philomena's Church","Devaraja Market","Jaganmohan Palace Art Gallery","Srirangapatna (day trip)"],
+ hampi:["Virupaksha Temple","Vittala Temple and Stone Chariot","Hampi Bazaar","Lotus Mahal","Elephant Stables","Hemakuta Hill","Queen's Bath","Matanga Hill sunrise"],
+ bengaluru:["Lalbagh Botanical Garden","Bengaluru Palace","Cubbon Park","ISKCON Temple","Vidhana Soudha (outside view)","Tipu Sultan's Summer Palace","Commercial Street"],
+ hyderabad:["Charminar","Golconda Fort","Qutb Shahi Tombs","Salar Jung Museum","Chowmahalla Palace","Hussain Sagar Lake","Birla Mandir","Ramoji Film City"],
+ chennai:["Marina Beach","Kapaleeshwarar Temple","Fort St. George","Government Museum","San Thome Basilica","Elliot's Beach","DakshinaChitra (day trip)","Mahabalipuram (day trip)"],
+ gangtok:["MG Marg","Tsomgo Lake","Baba Harbhajan Singh Mandir","Rumtek Monastery","Banjhakri Falls","Tashi Viewpoint","Nathula Pass (permit required)"],
+ shillong:["Umiam Lake","Elephant Falls","Shillong Peak","Ward's Lake","Don Bosco Museum","Laitlum Canyons","Police Bazaar"],
+ kaziranga:["Kaziranga National Park safari zones","Kaziranga Orchid and Biodiversity Park","Western Range (Bagori)","Central Range (Kohora)","Eastern Range (Agoratoli)","Tea gardens nearby"],
+ bhubaneswar:["Lingaraj Temple","Udayagiri and Khandagiri Caves","Mukteshwar Temple","Rajarani Temple","Dhauli Shanti Stupa","Nandankanan Zoological Park","Odisha State Museum"],
+ konark:["Konark Sun Temple","Chandrabhaga Beach","Archaeological Museum","Ramachandi Temple","Kuruma Buddhist Site"],
+ andaman:["Cellular Jail","Radhanagar Beach","Elephant Beach","Kalapathar Beach","Ross Island (Netaji Subhas Chandra Bose Island)","North Bay Island","Baratang limestone caves (tour dependent)"],
+ leh:["Leh Palace","Shanti Stupa","Thiksey Monastery","Hemis Monastery","Hall of Fame","Magnetic Hill","Sangam viewpoint","Nubra Valley","Pangong Tso (permit and road conditions apply)"],
+ jammu:["Vaishno Devi shrine route","Raghunath Temple","Bahu Fort and Garden","Amar Mahal Palace Museum","Mubarak Mandi Palace"],
+ kanyakumari:["Vivekananda Rock Memorial","Thiruvalluvar Statue","Kanyakumari Beach","Sunset Point","Kumari Amman Temple","Padmanabhapuram Palace (day trip)"],
+ madurai:["Meenakshi Amman Temple","Thirumalai Nayakkar Mahal","Gandhi Memorial Museum","Vandiyur Mariamman Teppakulam","Alagar Kovil (day trip)"],
+ coorg:["Abbey Falls","Raja's Seat","Dubare Elephant Camp","Talacauvery","Namdroling Monastery (Golden Temple)","Mandalpatti viewpoint"],
+ vizag:["RK Beach","Kailasagiri","Submarine Museum","Borra Caves (day trip)","Araku Valley (day trip)","Simhachalam Temple"],
+ nashik:["Trimbakeshwar Jyotirlinga Temple","Panchavati","Ramkund","Sula Vineyards","Pandav Leni Caves","Anjaneri Hills"],
+ surat:["Dumas Beach","Dutch Garden","Sardar Patel Museum","Science Centre","Gopi Talav","Dandi (day trip)"],
+ mahabalipuram:["Shore Temple","Pancha Rathas","Arjuna's Penance","Krishna's Butter Ball","Mahabalipuram Beach","Crocodile Bank (nearby)"]
+};
+function makeItinerary(dest,days,style){
+ const place=dest.toLowerCase().trim();
+ const aliases={
+  "new delhi":"delhi","ncr":"delhi","agra":"agra","varanasi city":"varanasi","banaras":"varanasi","kashi":"varanasi","kashmir valley":"kashmir","jammu and kashmir":"kashmir","digha west bengal":"digha","gangtok":"sikkim","north sikkim":"sikkim","east sikkim":"sikkim","west sikkim":"sikkim","arunachal pradesh":"arunachal","itanagar":"arunachal","meghalaya":"meghalaya","shillong":"meghalaya","cherrapunji":"meghalaya","sohra":"meghalaya","khajuraho":"khajuraho","kedarnath dham":"kedarnath","tawang":"tawang","spiti valley":"spiti","kaza":"spiti","bodh gaya":"bodh_gaya","bodhgaya":"bodh_gaya",
+  "vrindavan":"mathura","mathura vrindavan":"mathura","alappuzha":"alleppey","sri nagar":"srinagar",
+  "coorg":"coorg","kodagu":"coorg","vizag":"vizag","visakhapatnam":"vizag","mahabalipuram":"mahabalipuram","mamallapuram":"mahabalipuram",
+  "konark":"konark","puri-konark":"puri","leh ladakh":"leh","ladakh":"leh","port blair":"andaman","andaman and nicobar":"andaman",
+  "kanyakumari":"kanyakumari","madurai":"madurai","nashik":"nashik","rishikesh":"rishikesh","haridwar":"haridwar"
+ };
+ let key=aliases[place]||Object.keys(special).find(k=>place===k||place.includes(k)||k.includes(place));
+ let list=key?special[key]:activitySets[style]||activitySets.balanced;
+ const out=[];
+ for(let d=0;d<days;d++){
+  let acts=[];
+  if(d===0)acts.push({time:"09:00 AM",title:"Arrive and check in",detail:`Travel from your starting point to ${dest}. Check in or leave your bags and get settled.`});
+  acts.push({time:d===0?"11:00 AM":"09:30 AM",title:list[(d*3)%list.length],detail:"Check the current opening hours, entry fees and travel time before visiting."});
+  acts.push({time:"01:00 PM",title:"Lunch and a break",detail:"Choose a well-reviewed local restaurant and keep meal costs within your budget."});
+  acts.push({time:"03:00 PM",title:list[(d*3+1)%list.length],detail:"Allow time to travel between places. Keep this activity flexible depending on weather."});
+  if(d===days-1)acts.push({time:"06:00 PM",title:"Prepare for your return journey",detail:"Collect your belongings and leave enough time for your confirmed transport."});
+  else acts.push({time:"06:30 PM",title:list[(d*3+2)%list.length],detail:"Enjoy the local atmosphere, then return to your accommodation for dinner."});
+  out.push({day:d+1,activities:acts});
+ }
+ return out;
+}
+function buildTrip(data){
+ const budget=Number(data.budget),people=Number(data.people),days=Number(data.days);
+ const amounts=[Math.round(budget*.30),Math.round(budget*.30),Math.round(budget*.22),Math.round(budget*.13)];
+ amounts.push(budget-amounts.reduce((a,b)=>a+b,0));
+ const categories=["Transport","Accommodation","Food","Sightseeing & activities","Extra / emergency buffer"];
+ return {days:makeItinerary(data.destination,days,data.style),budget:categories.map((name,i)=>({name,amount:amounts[i]})),tips:[
+ "Compare transport options and check journey duration before booking.",
+ "Choose accommodation with recent reviews and convenient access to your planned places.",
+ "Confirm attraction opening hours, entry fees, permits and local transport.",
+ "Keep emergency money separate and carry essential documents.",
+ "Check the weather forecast close to your travel date."
+ ],note:"This is a suggested sample itinerary and estimated budget allocation. It does not use live prices, real-time availability or verified opening hours. Confirm all details before booking."};
+}
+function renderTrip(data,save=true){
+ const it=data.itinerary;
+ $("resultTitle").textContent=`${data.days} days in ${data.destination}`;
+ $("resultSubtitle").textContent=`${data.origin} → ${data.destination} · ${data.people} traveller(s)`;
+ $("modeBadge").textContent="Suggested itinerary · Sample planner";
+ $("summary").innerHTML=[["Starting from",data.origin],["Travellers",`${data.people} ${data.people==1?"person":"people"}`],["Budget per person",money(data.budget/data.people)]].map(x=>`<div class="summary-box"><span>${esc(x[0])}</span><b>${esc(x[1])}</b></div>`).join("");
+ $("dayPlans").innerHTML=it.days.map(day=>`<article class="day-card"><h3>Day ${esc(day.day)} <span>/ ${esc(data.destination)}</span></h3>${day.activities.map(a=>`<div class="activity"><time>${esc(a.time)}</time><p><b>${esc(a.title)}</b><br>${esc(a.detail)}</p></div>`).join("")}</article>`).join("");
+ $("budgetTotal").textContent=money(data.budget);
+ $("budgetRows").innerHTML=it.budget.map(r=>`<div class="budget-row"><span>${esc(r.name)}</span><strong>${money(r.amount)}</strong></div>`).join("");
+ $("budgetMessage").textContent=`Estimated budget per person: ${money(data.budget/data.people)}. The split is illustrative; actual costs depend on season, distance and choices.`;
+ $("tips").innerHTML=it.tips.map(t=>`<li>${esc(t)}</li>`).join("");
+ $("disclaimer").textContent=it.note;
+ $("mapLink").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(data.destination);
+ $("results").classList.remove("hidden");
+ $("results").scrollIntoView({behavior:"smooth"});
+ if(save){let trips=loadTrips();trips.unshift(data);trips=trips.slice(0,8);localStorage.setItem("tripplanner_trips",JSON.stringify(trips));showSaved();}
+}
+$("tripForm").addEventListener("submit",e=>{
+ e.preventDefault();$("error").classList.add("hidden");
+ const data={origin:$("origin").value.trim(),destination:$("destination").value.trim(),budget:Number($("budget").value),days:Number($("days").value),people:Number($("people").value),style:$("style").value};
+ if(!data.origin||!data.destination||data.budget<500||!Number.isInteger(data.days)||data.days<1||data.days>14||!Number.isInteger(data.people)||data.people<1||data.people>20){$("error").textContent="Please enter valid details. Budget must be at least ₹500, days 1–14 and travellers 1–20.";$("error").classList.remove("hidden");return;}
+ data.itinerary=buildTrip(data);renderTrip(data,true);
+});
+function loadTrips(){try{return JSON.parse(localStorage.getItem("tripplanner_trips")||"[]")}catch(e){return []}}
+function showSaved(){
+ const trips=loadTrips(),box=$("savedList");
+ if(!trips.length){box.innerHTML='<p class="muted">No trips saved yet. Create your first itinerary above.</p>';return;}
+ box.innerHTML=trips.map((t,i)=>`<div class="saved-item"><div><b>${esc(t.origin)} → ${esc(t.destination)}</b><small>${t.days} days · ${t.people} traveller(s) · ${money(t.budget)}</small></div><button onclick="openSaved(${i})">View trip ↗</button></div>`).join("");
+}
+function openSaved(i){const t=loadTrips()[i];if(t)renderTrip(t,false)}
+function clearTrips(){if(confirm("Delete all saved trips from this browser?")){localStorage.removeItem("tripplanner_trips");showSaved()}}
+showSaved();
+</script>
+</body>
+</html>
